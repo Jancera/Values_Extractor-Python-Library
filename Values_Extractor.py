@@ -50,7 +50,7 @@ class Values_Extractor:
         self.print_ = all_printed
 
     def extractor(self):
-        self.text = self.text + '           '
+        self.text = self.text + '           '  # Avoiding errors
         numbers_index = []
         numbers = '1 2 3 4 5 6 7 8 9 0 .'.split()
         time_pattern = ['hours ', 'hour ', ' hours ', ' hour ', ' h ', 'h ', ' minute', 'minute',
@@ -81,7 +81,7 @@ class Values_Extractor:
             else:  # a_ == 0:
                 numbers_index[numbers_index.index(predecessor_num)] = numbers_index[ind] + 1
 
-            # It is to let the indexes equals, because of the logic used above was to cut my main list every time the
+            # It is to let the indexes equivalents, because the logic used above was to cut my main list every time the
             # code found one number, so here I am leaving all indexes equivalent to the main list
 
         # Until here is to get the indexes of the numbers
@@ -101,9 +101,9 @@ class Values_Extractor:
             text_after = ''.join(text_after)
             classifiers.append(text_after)
 
-            # Getting the classifiers, the measurement units
+            # Getting the classifiers, the pieces of text to get the measurement units
 
-        consecutive_numbers = list(dict.fromkeys(consecutive_numbers))  # Because of I added to my consecutive_numbers
+        consecutive_numbers = list(dict.fromkeys(consecutive_numbers))  # Because I added to my consecutive_numbers
         # list (line 58-59) the consecutive numbers 2 times now I need to delete repeated numbers.
         consecutive_numbers.append(-1)  # Avoiding errors
 
