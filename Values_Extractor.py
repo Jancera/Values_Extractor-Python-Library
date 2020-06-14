@@ -31,11 +31,6 @@ class Values_Extractor:
     x will be equal one list with the values [60 sec]
 
     In your terminal will be printed 60 sec too
-
-    See also
-    --------
-    My youtube channel with a video explaining :
-    My github repository if you want to help me making some pull requests :
     """
 
     def __init__(
