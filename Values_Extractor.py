@@ -1,38 +1,4 @@
 class Values_Extractor:
-    """
-
-    The code will return the values with the measurements units converted according to the S.I
-
-
-    text_to_extract is the text that you want to extract the values.
-
-
-
-    classification_type can be 'time', 'distance', 'speed' and it defines what type of results you want.
-
-
-
-    all_printed=True is to print all results that the algorithm found.
-
-    Examples
-    --------
-    Input:
-
-
-    text = I have only 1 minute
-
-    a = Values_Extractor(text, classification_time='time', all_printed=True)
-
-    x = extractor()
-
-
-    Output:
-
-    x will be equal one list with the values [60 sec]
-
-    In your terminal will be printed 60 sec too
-    """
-
     def __init__(
             self,
             text_to_extract=None,
@@ -45,7 +11,7 @@ class Values_Extractor:
         self.print_ = all_printed
 
     def extractor(self):
-        self.text = self.text + '           '  # Avoiding errors
+        self.text = ' ' + self.text + '             '  # Avoiding errors
         numbers_index = []
         numbers = '1 2 3 4 5 6 7 8 9 0 .'.split()
         time_pattern = ['hours ', 'hour ', ' hours ', ' hour ', ' h ', 'h ', ' minute', 'minute',
@@ -80,7 +46,6 @@ class Values_Extractor:
             # code found one number, so here I am leaving all indexes equivalent to the main list
 
         # Until here is to get the indexes of the numbers
-
         numbers_index.append(-1)
         classifiers = []
         consecutive_numbers = []
@@ -101,7 +66,6 @@ class Values_Extractor:
         consecutive_numbers = list(dict.fromkeys(consecutive_numbers))  # Because I added to my consecutive_numbers
         # list (line 58-59) the consecutive numbers 2 times now I need to delete repeated numbers.
         consecutive_numbers.append(-1)  # Avoiding errors
-
         for index in consecutive_numbers:
 
             if index != -1:
@@ -121,10 +85,8 @@ class Values_Extractor:
 
                     # Slicing the list of consecutive numbers, getting one consecutive number per time
                     # Transforming the indexes into the real number and multiplying by -1
-
         final_values = []
         count = 0
-
         for word in classifiers:
 
             if word[:8] in time_pattern or word[:7] in time_pattern or word[:6] in time_pattern or \
@@ -141,7 +103,7 @@ class Values_Extractor:
                         final_values.append([float(numbers_index[count]) * -60, ' sec'])
                         count = count + 1
 
-                    elif word[:8] == ' second' or word[:7] == 'second' or word[:3] == ' s ' or word[:2] == 's ':
+                    elif word[:7] == ' second' or word[:6] == 'second' or word[:3] == ' s ':
                         final_values.append([float(numbers_index[count]) * -1, ' sec'])
                         count = count + 1
                 else:
@@ -155,7 +117,7 @@ class Values_Extractor:
                         final_values.append([float(copy_text[numbers_index[count]]) * 60, ' sec'])
                         count = count + 1
 
-                    elif word[:8] == ' second' or word[:7] == 'second' or word[:3] == ' s ' or word[:2] == 's ':
+                    elif word[:7] == ' second' or word[:6] == 'second' or word[:3] == ' s ':
 
                         final_values.append([float(copy_text[numbers_index[count]]), ' sec'])
                         count = count + 1
